@@ -1,82 +1,90 @@
-# WP File Version Manager
+# File Version Manager
 
-**Stable tag:** trunk
-
+**Contributors:** Riley Sandborg
+**Tags:** files, file manager, version control, download manager, wp-filebase
+**Requires at least:** 6.2
+**Tested up to:** 6.7.2
+**Stable tag:** 1.0.0
 **License:** GPLv3 or later
+**License URI:** https://www.gnu.org/licenses/gpl-3.0.html
 
-File Version Manager is a WordPress plugin that allows you to conveniently manage file versions. It uploads files to a custom directory and allows for easy updating without having to change links everywhere.
-
-This plugin is meant as a lite replacement for WP-Filebase Pro.
+Conveniently upload, manage versions, and provide access to files on your WordPress site.
 
 ## Description
 
-This plugin provides an easy way to manage file versions across your WordPress site. It offers features such as:
+File Version Manager provides a streamlined interface for managing downloadable files within WordPress. Upload files to a dedicated directory, easily update them while maintaining consistent access links, organize them with categories, and embed them using simple shortcodes.
 
--   Custom upload directory management
--   File versioning
--   Category management for files
--   Shortcode support for easy file embedding
--   WP-Filebase Pro migration support
+This plugin aims to be a lightweight alternative for managing file downloads and versions, including features inspired by WP-Filebase Pro.
+
+**Key Features:**
+
+-   **File Management:** Upload, edit details (display name, description), replace files, and delete.
+-   **Versioning:** Tracks file versions, with an option to auto-increment versions upon replacement.
+-   **Category Management:** Create, edit, delete, and organize files into hierarchical categories.
+-   **Dedicated Upload Directory:** Files are stored in `/wp-content/uploads/filebase/` (by default).
+-   **Shortcode Support:** Embed single files or lists of files from categories using `[fvm] [...]`.
+-   **Direct Download Links:** Files are accessed via clean URLs (e.g., `/?file=your-file.pdf`).
+-   **WP-Filebase Pro Migration:** Includes tools to migrate categories and files from WP-Filebase Pro.
+-   **Optional File Scanning:** Can automatically scan the upload directory for added/removed files (can be disabled for performance).
+-   **Database Upgrades:** Handles necessary database schema updates between versions.
 
 ## Installation
 
-1. Upload the `file-version-manager` folder to the `/wp-content/plugins/` directory.
-2. Activate the plugin through the 'Plugins' menu in WordPress.
-3. Configure the plugin settings under the 'File Version Manager' menu in the WordPress admin panel.
+1.  Download the plugin `.zip` file.
+2.  Navigate to **Plugins > Add New** in your WordPress admin area.
+3.  Click **Upload Plugin** and choose the downloaded `.zip` file.
+4.  Activate the plugin through the **Plugins** menu in WordPress.
+5.  (Optional) Configure plugin settings under the **Files > Settings** menu.
+
+Alternatively, upload the `file-version-manager` folder to the `/wp-content/plugins/` directory via FTP and activate the plugin.
 
 ## Usage
 
 ### Managing Files
 
-To manage files:
+Navigate to the **Files > All Files** menu:
 
-1. Go to the 'Files' page under the 'File Version Manager' menu.
-2. Upload new files or manage existing ones.
-3. Edit file details, replace files, or delete them as needed.
+-   **Upload:** Drag & drop files or use the "Select Files" button.
+-   **Edit:** Click the "Edit" action link for a file to modify its Display Name, Description, Version (if auto-increment is off), Categories, and Offline status. You can also replace the file here.
+-   **Delete:** Use the "Delete" action link or the bulk delete option.
 
-### Categories
+### Managing Categories
 
-> **TODO:** Add category editing and link count value to a query on the file page to show all files within that category
+Navigate to the **Files > Categories** menu:
 
-Organize your files into categories:
-
-1. Navigate to the 'Categories' page under the 'File Version Manager' menu.
-2. Create, edit, or delete categories as needed.
+-   **Add:** Use the form on the left to add new categories, optionally assigning a parent.
+-   **Edit:** Click the "Edit" action link for a category to modify its Name, Description, Parent, and Exclude from Browser status.
+-   **Delete:** Use the "Delete" action link or the bulk delete option.
 
 ### Shortcodes
 
-Use shortcodes to embed files in your posts or pages:
+Use the `[fvm]` shortcode to display files in your posts or pages:
 
--   For a single file: `[fvm tag="file" id="1"]`
--   For a category of files: `[fvm tag="category" id="1"]`
+-   **Single File:** `[fvm tag="file" id="123"]` (replace `123` with the actual File ID)
+-   **Category Listing:** `[fvm tag="category" id="45"]` (replace `45` with the actual Category ID)
 
-#### Shortcode options:
-
--   `tag`: Use "file" for a single file or "category" for a list of files.
--   `id`: The ID of the file or category.
--   `tpl`: Template option (e.g., "urlonly", "table", "thumbnail-grid-btns").
+_(Note: Additional template options (`tpl="..."`) may be available depending on your theme or further development.)_
 
 ## Settings
 
-Configure plugin settings:
+Navigate to **Files > Settings**:
 
-1. Go to the 'Settings' page under the 'File Version Manager' menu.
-2. Set your custom upload directory.
-3. Enable or disable auto-increment versioning.
-4. Configure other options as needed.
-
-## WP-Filebase Pro Migration
-
-If you're migrating from WP-Filebase Pro:
-
-1. Go to the 'WP-Filebase Pro' tab in the settings.
-2. Follow the instructions to migrate your files and categories.
+-   **Settings Tab:**
+    -   **Auto-Increment Version:** Enable/disable automatic version incrementing when replacing files.
+    -   **File Scanning:** Enable/disable automatic scanning of the upload directory for changes.
+    -   **Debug Logs:** Enable detailed logging to `wp-content/fvm_*.log` files for troubleshooting.
+    -   **Database Upgrade:** (Appears when needed) Run manual database upgrades required by plugin updates.
+-   **WP-Filebase Pro Tab:**
+    -   **One-Click Migration:** Import categories and files from existing WP-Filebase Pro tables.
+    -   **Update Shortcodes:** (Currently unavailable) Tool to convert WP-Filebase shortcodes.
 
 ## Developer Notes
 
--   The plugin uses custom database tables for file and category management.
--   Debug logs can be enabled in the settings for troubleshooting.
+-   The plugin uses custom database tables (`fvm_files`, `fvm_categories`, `fvm_relationships`).
+-   It includes a basic upgrade mechanism (`FVM_Upgrade`).
+-   AJAX is used for operations like fetching data for edit modals.
+-   Plugin includes a custom admin UI with toolbar and header.
 
 ## Support
 
-For support, please submit an issue on this GitHub repository.
+For issues, questions, or feature requests, please submit an issue on the [GitHub repository](https://github.com/sandporg/file-version-manager/).
