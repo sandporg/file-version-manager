@@ -27,14 +27,6 @@ If you have a question or concern, please submit an issue on the GitHub reposito
 
 == Changelog ==
 
-= 1.0.0 =
-* Overhaul plugin UI
-* Overhaul codebase
-* Updated plugin icon
-* Added support for pagination in screen options
-* Removed wp admin notices from appearing in plugin admin pages
-* Fix database upgrade feature and updated column character defaults
-
 = 0.14.2 =
 * Added searching by id for files
 
