@@ -39,6 +39,7 @@ class FVM_Shortcode {
 			'show_version' => true,
 			'show_size' => true,
 			'show_categories' => true,
+			'orderby' => 'default', // Default order (usually ID or database order)
 		), $atts, 'fvm' );
 
 		if ( $atts['tag'] === 'file' || empty( $atts['tag'] ) ) {
@@ -241,6 +242,15 @@ class FVM_Shortcode {
 	 */
 	private function table( $files, $atts ) {
 		$files = is_array( $files ) ? $files : array( $files );
+
+		// Sort files if 'orderby' attribute is set to 'name'
+		if ( isset( $atts['orderby'] ) && $atts['orderby'] === 'name' ) {
+			usort( $files, function ($a, $b) {
+				$name_a = ! empty( $a->file_display_name ) ? $a->file_display_name : $a->file_name;
+				$name_b = ! empty( $b->file_display_name ) ? $b->file_display_name : $b->file_name;
+				return strnatcasecmp( $name_a, $name_b ); // Natural case-insensitive sort
+			} );
+		}
 
 		$show_description = isset( $atts['show_description'] ) ? filter_var( $atts['show_description'], FILTER_VALIDATE_BOOLEAN ) : true;
 		$show_version = isset( $atts['show_version'] ) ? filter_var( $atts['show_version'], FILTER_VALIDATE_BOOLEAN ) : true;
