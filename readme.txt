@@ -27,6 +27,9 @@ If you have a question or concern, please submit an issue on the GitHub reposito
 
 == Changelog ==
 
+= 0.14.3 =
+* Added orderby shortcode attribute for the table template
+
 = 0.14.2 =
 * Added searching by id for files
 
